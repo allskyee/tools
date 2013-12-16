@@ -1,0 +1,7 @@
+fio --bs=4k --ioengine=libaio --iodepth=256 --rw=randread --name=rand --filename=1gb.ext4 --size=256M
+fio --bs=4k --ioengine=libaio --iodepth=256 --rw=randread --name=read --filename=mnt/2gb.tar --size=256M --thread --startdelay=1
+
+sudo bash -c "echo 3 > /proc/sys/vm/drop_caches"
+
+blktrace -d /dev/sda1 -o foo
+blkparse -i foo.blktrace. > foo.blkparse

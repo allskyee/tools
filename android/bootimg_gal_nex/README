@@ -1,0 +1,30 @@
+unzip
+./split_bootimg.pl boot.img
+gunzip -c ../boot-new.img-ramdisk.gz | cpio -i
+
+zip
+find . | cpio -o -H newc | gzip > ../boot-new.img-ramdisk.gz
+./mkbootimg --kernel zImage.sqfs_blktr --ramdisk boot-new.img-ramdisk.gz --base 80000000 --pagesize 2048 -o boot-new.img
+
+
+partition info
+
+ls -l /dev/block/platform/omap/omap_hsmmc.0/by-name/
+boot -> /dev/block/mmcblk0p7 (8192)
+recovery -> /dev/block/mmcblk0p8 (12,224)
+
+system -> /dev/block/mmcblk0p10 (669,696)
+userdata -> /dev/block/mmcblk0p12 (1,4198,767)
+cache -> /dev/block/mmcblk0p11 (442,368)
+
+dgs -> /dev/block/mmcblk0p6
+efs -> /dev/block/mmcblk0p3
+metadata -> /dev/block/mmcblk0p13
+misc -> /dev/block/mmcblk0p5
+param -> /dev/block/mmcblk0p4
+radio -> /dev/block/mmcblk0p9
+sbl -> /dev/block/mmcblk0p2
+xloader -> /dev/block/mmcblk0p1
+
+
+

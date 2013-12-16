@@ -1,0 +1,13 @@
+initrd
+- replaced adbd with previous version's, ro.secure=0 didn't work for last
+- add stor_mon.sh, but disabled
+  added STOR_MON_FILE env variable
+- restore cache directory to normal usage
+- add cpu_mon.sh, enabled
+  added CPU_MON_FILE env variable
+- add getdelays service
+
+kernel 
+- squashfs
+- blktrace
+- adding support for delay acct
